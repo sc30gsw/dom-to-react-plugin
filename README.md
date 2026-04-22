@@ -50,21 +50,73 @@ Runs both skills in sequence. If capture succeeds but React generation fails, th
   }
   ```
 
-### Plugin registration (local dev)
+### Plugin installation
 
-Add to `~/.claude/plugins/installed_plugins.json`:
+This repository ships its own [Claude Code plugin marketplace](https://docs.claude.com/en/docs/claude-code/plugin-marketplaces) (`.claude-plugin/marketplace.json`) named `dom-to-react-plugin`, which exposes the `dom-to-react` plugin.
 
-```json
-"dom-to-react@local": [{
-  "scope": "user",
-  "installPath": "<plugin-install-path>",
-  "version": "1.0.0",
-  "installedAt": "2026-04-22T00:00:00Z",
-  "lastUpdated": "2026-04-22T00:00:00Z"
-}]
+#### Option 1 — Install from GitHub (recommended)
+
+Inside a Claude Code session:
+
+```bash
+/plugin marketplace add sc30gsw/dom-to-react-plugin
+/plugin install dom-to-react@dom-to-react-plugin
+/reload plugin
 ```
 
-Then restart Claude Code.
+Or from your shell using the non-interactive CLI:
+
+```bash
+claude plugin marketplace add sc30gsw/dom-to-react-plugin
+claude plugin install dom-to-react@dom-to-react-plugin
+```
+
+To pin to a specific tag or branch, append `@<ref>` to the marketplace source:
+
+```bash
+claude plugin marketplace add sc30gsw/dom-to-react-plugin@v1.0.0
+```
+
+To install scoped to a single project (shared with your team via `.claude/settings.json`):
+
+```bash
+claude plugin marketplace add sc30gsw/dom-to-react-plugin --scope project
+claude plugin install dom-to-react@dom-to-react-plugin
+```
+
+#### Option 2 — Install from a local clone
+
+Useful while developing the plugin locally:
+
+```bash
+git clone https://github.com/sc30gsw/dom-to-react-plugin.git
+cd dom-to-react-plugin
+
+claude plugin marketplace add .
+claude plugin install dom-to-react@dom-to-react-plugin
+```
+
+After editing the plugin sources, refresh the cache:
+
+```bash
+claude plugin marketplace update dom-to-react-plugin
+```
+
+#### Verify the installation
+
+```bash
+claude plugin marketplace list
+claude plugin list
+```
+
+Once enabled, the skills are available as `/page-capture`, `/md-to-react`, and `/dom-react-sync`.
+
+#### Uninstall
+
+```bash
+claude plugin uninstall dom-to-react@dom-to-react-plugin
+claude plugin marketplace remove dom-to-react-plugin
+```
 
 ## Example workflow
 

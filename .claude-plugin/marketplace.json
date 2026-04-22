@@ -1,0 +1,33 @@
+{
+  "name": "dom-to-react-plugin",
+  "owner": {
+    "name": "sc30gsw"
+  },
+  "metadata": {
+    "description": "Marketplace hosting the dom-to-react Claude Code plugin",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "dom-to-react",
+      "source": "./",
+      "description": "Chrome DOM → [PageName].md → React Component — capture any live page as structured Markdown, then optionally generate React components with pixel-accurate styles",
+      "version": "1.0.0",
+      "author": {
+        "name": "sc30gsw"
+      },
+      "homepage": "https://github.com/sc30gsw/dom-to-react-plugin",
+      "repository": "https://github.com/sc30gsw/dom-to-react-plugin",
+      "license": "MIT",
+      "keywords": [
+        "dom-extraction",
+        "page-capture",
+        "react-generation",
+        "chrome-devtools",
+        "design-to-code"
+      ],
+      "category": "design-to-code",
+      "tags": ["chrome-devtools-mcp", "react", "tailwind", "css-modules", "scaffolding"]
+    }
+  ]
+}
