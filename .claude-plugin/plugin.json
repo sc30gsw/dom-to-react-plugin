@@ -1,0 +1,12 @@
+{
+  "name": "dom-to-react",
+  "version": "1.0.0",
+  "description": "Chrome DOM → [PageName].md → React Component — capture any live page as structured Markdown, then optionally generate React components with pixel-accurate styles",
+  "author": {
+    "name": "sc30gsw"
+  },
+  "license": "MIT",
+  "keywords": ["dom-extraction", "page-capture", "react-generation", "chrome-devtools", "design-to-code"],
+  "skills": "./skills/",
+  "agents": "./agents/"
+}

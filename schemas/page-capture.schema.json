@@ -1,0 +1,57 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "page-capture.schema.json",
+  "title": "PageCapture",
+  "description": "Schema for [PageName].md frontmatter and section structure produced by page-capture skill",
+  "type": "object",
+  "required": ["name", "sourceUrl", "capturedAt", "viewport", "mode", "schemaVersion"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Page name used as file name and component name",
+      "pattern": "^[A-Za-z][A-Za-z0-9_-]*$"
+    },
+    "sourceUrl": {
+      "type": "string",
+      "format": "uri",
+      "description": "Original URL of the captured page"
+    },
+    "capturedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO-8601 capture timestamp"
+    },
+    "viewport": {
+      "type": "object",
+      "required": ["width", "height"],
+      "properties": {
+        "width": { "type": "integer", "minimum": 320 },
+        "height": { "type": "integer", "minimum": 200 }
+      }
+    },
+    "mode": {
+      "type": "string",
+      "enum": ["verbatim", "tokenized"],
+      "description": "verbatim: computed styles as-is; tokenized: abstracted to design tokens"
+    },
+    "styling": {
+      "type": "string",
+      "enum": ["tailwind", "css-modules"],
+      "description": "Target styling system when generating React components. Optional — only needed if md-to-react will be run"
+    },
+    "screenshot": {
+      "type": "string",
+      "description": "Relative path to full-page screenshot PNG"
+    },
+    "schemaVersion": {
+      "type": "integer",
+      "const": 1,
+      "description": "Schema version for migration detection"
+    }
+  },
+  "sections": {
+    "description": "Required top-level sections in the markdown body",
+    "required": ["Design Tokens", "Accessibility Tree", "Component Tree", "Assets"],
+    "optional": ["Interactions", "Notes"]
+  }
+}

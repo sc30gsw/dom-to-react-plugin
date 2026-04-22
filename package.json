@@ -1,0 +1,31 @@
+{
+  "name": "dom-to-react-plugin",
+  "version": "1.0.0",
+  "description": "Chrome DOM → [PageName].md → React Component Claude Code plugin",
+  "type": "module",
+  "files": [
+    ".claude-plugin/",
+    "agents/",
+    "skills/",
+    "schemas/",
+    "templates/",
+    "README.md",
+    "CLAUDE.md"
+  ],
+  "keywords": [
+    "claude-code",
+    "plugin",
+    "dom-extraction",
+    "react-generation",
+    "chrome-devtools"
+  ],
+  "author": "sc30gsw",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.2.4",
+    "tailwindcss": "^4.2.4"
+  }
+}
