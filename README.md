@@ -33,6 +33,28 @@ Works with any MD file that conforms to `schemas/page-capture.schema.json` (incl
 
 Runs both skills in sequence. If capture succeeds but React generation fails, the `.md` is preserved for manual retry.
 
+## Agents
+
+### `page-scaffolder`
+
+A subagent that orchestrates `/page-capture` and (optionally) `/md-to-react` end-to-end. It is registered with `description: "Use PROACTIVELY"`, so Claude Code will invoke it automatically when your prompt suggests "clone this page", "recreate this UI as React", "extract DOM", "capture this page", "make a snapshot of the design", or similar. You can also call it explicitly:
+
+```text
+> Use the page-scaffolder agent to capture https://stripe.com/pricing as StripePricing
+```
+
+Behavior:
+
+- **MD-only by default.** It stops after writing `./pages/<Name>.md` + the screenshot and asks before generating React. Pass an explicit instruction such as "also generate the React component" to skip the confirmation.
+- **Infers `Name` from the URL** (e.g. `/dashboard` → `Dashboard`) when you don't supply one.
+- **Defaults to `mode=verbatim`** for capture and `styling=tailwind` for React generation.
+- **Reports stats** (node count, token count, Tailwind coverage) and warnings after each phase.
+- **Faithful reproduction guarantees**: never reinterprets computed styles, preserves original class names, leaves event handlers/forms as inert stubs, and inlines SVGs via `dangerouslySetInnerHTML` (you should extract them for production).
+
+Required tools: `Read`, `Write`, `Edit`, `Glob`, `Grep`, `Bash`, plus the `chrome-devtools` MCP tools (`navigate_page`, `new_page`, `take_snapshot`, `take_screenshot`, `evaluate_script`, `wait_for`, `resize_page`, `list_pages`, `select_page`).
+
+Use the agent when you want a single conversational entry point ("just capture this page for me"); use the slash skills when you already know exactly which step you want to run.
+
 ## Setup
 
 ### Prerequisites
